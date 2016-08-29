@@ -1,0 +1,35 @@
+---
+title: "Tarea 1"
+author: "Joshua Velez"
+date: "29 de agosto de 2016"
+output: html_document
+---
+ # Lista de calificaciones #
+
+ ## Primer Semestre
+ 
+ 1. Programación Actuarial I  calificación 7
+ 
+ 2. DHPC calificación 10
+ 
+ 3. Problemas de matemáticas básicas calificación 6
+ 
+ 4. Matemáticas Básicas calificación 6
+ 
+ 5. Introducción a la Profesión Actuarial calificación 7
+ 
+ 6. Conceptos de Cálculo calificación 10
+ 
+ ## Segundo Semestre
+ 
+ 1. Programación Actuarial II calificación 7
+ 
+ 2. Teoría del Interés I calificación 7
+ 
+ 3. FHS calificación 10
+ 
+ 4. Cálculo Diferencial calificación 7
+ 
+ 5. Teoría de Ecuaciones calificación 9
+ 
+ 6. Geometría Analítica calificación 10
