@@ -181,5 +181,59 @@ class(x)
   setwd("~/GitHub/Programacion_Actuarial_III_OT16")
   data <- read.csv("Datos_S&P.csv")
   data <- read.table("Datos_S&P.csv",T,",")
-  data <- read.table("Datos_S&P.csv",F,","))
+  data <- read.table("Datos_S&P.csv",F,",",nrows = 100) # tarea 2
+  clases <- sapply(data,class)
+  data <- read.table("Datos_S&P.csv",F,",",colClasses = clases)
   data
+
+  # uso de Dput y dget
+  
+  y <- data.frame(a=1,b="a")
+  dput(y) # al correr asi se muestra la descripcion del objeto
+  dput(y,file="y.R") # almaceno un texto mostrando como se guardo al objeto en R
+  nueva.y <- dget("y.R")
+  y
+  nueva.y
+  
+  x <- "Programacion Actuarial III"
+  y <- data.frame(a=1,b="a")
+  dump(c("x","y"),file= "data.R") # para multiples variables, se pone entre comillas para que pegue el objeto llamado x
+  rm(x,y) # remueve x, y
+  source("data.R") # lo busca y lo vuelve a cargar
+   
+  dput(airquality, file = "Airquality.R") # Guarda un archivo directo en memoria
+  
+  con <- url("http://www.fcfm.buap.mx/",'r')
+  x <- readLines(con,7) # con writeLines lo guarda directo en un archivo
+  x
+  
+  # Creamos un vector
+  x <- c("a","b","c","c","d","e")
+  # veamos el vector
+  x
+  # extraemos elementos del vector
+  x[1] # en orden alfabetico
+  x[2]
+  # Tambien pdemos extraer una secuencia de datos
+  x[1:4]
+  # ES posible extraer elementos con restriccion
+  x[x>"b"]
+  # De manera equivalente se puede obtener un vector logico
+  u <- x == "c"
+  u
+  p
+  x[u]
+  
+  # Creamos una lista
+  x <- list(foo= 1:4, bar =0.6)
+  # extraemos el primer elemento de la lista
+  # este elemento es una lista que contiene una secuencia
+  x[1]
+  
+  # extraemos nuevamente el primer elemento de la lista ahora el elemento es la secuencia en si
+  x[[1]]
+  #extraemos un elemento por nombre
+  x$bar
+  x[["bar"]] # identifica el nombre
+  x["bar"]
+  
