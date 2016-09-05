@@ -181,6 +181,5 @@ class(x)
   setwd("~/GitHub/Programacion_Actuarial_III_OT16")
   data <- read.csv("Datos_S&P.csv")
   data <- read.table("Datos_S&P.csv",T,",")
-  data
-  data <- read.table("Datos_S&P.csv",F,",")
+  data <- read.table("Datos_S&P.csv",F,","))
   data
