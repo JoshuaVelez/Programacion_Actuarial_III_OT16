@@ -227,13 +227,70 @@ class(x)
   # Creamos una lista
   x <- list(foo= 1:4, bar =0.6)
   # extraemos el primer elemento de la lista
-  # este elemento es una lista que contiene una secuencia
+  # este elemento es una lista que contiene una secuencia, porlo tanto te da toda la lista
   x[1]
   
   # extraemos nuevamente el primer elemento de la lista ahora el elemento es la secuencia en si
   x[[1]]
-  #extraemos un elemento por nombre
-  x$bar
+  #extraemos un elemento por nombre esto es parecido al corchete doble
+  x$bar # cuando esta el signo de pesos no se pueden hacer operaciones
   x[["bar"]] # identifica el nombre
   x["bar"]
+  x$foo[2]
   
+  # Creamos una lista de 3 elementos
+  x <- list(foo = 1:4, bar= 0.6, baz="Hola")
+  #Extraemos el primer y tercer elemento de la lista
+  x[c(1,3)]
+  x[[c(1,3)]] # selecciona del primer grupo el tercer elemento
+  # Los corchetes [[ ]] pueden usar indices calculados, el $ solamente puede usar el nombre literal
+  name <- "foo"
+  x[[name]]
+  x$name
+  x$foo
+  
+  # se pueden extraer elementos de los elementos extraidos
+  x <- list(a= list(10,12,14), b= list(3.14,2.81))
+  x[[c(1,3)]]
+  x[[1]][[3]]
+  x[[c(2,1)]]
+  # Subconjunto de una matriz
+  x<- matrix(1:6,2,3)
+  x
+  x[1,2] # extrae dato
+  x[2,1]
+  x[1,] # extrae una fila
+  x[,2] # extrae una columna
+  # con drop = FALSE mantiene la dimension y el resultado sera una matriz
+   x[,2]
+   x[1,2, drop= FALSE]
+   x[1,]
+   x [1, ,drop= FALSE]
+   # Subconjunto con nombres
+   x <-list(aardvark=1:5)
+   x$a # inicial de aardvark
+   x[["a"]]
+   x[["a",exact= FALSE]] # pueden no ser explicitas y ser parciales
+   
+   # Valores faltantes
+   airquality[1:6,] # extrae las primeras 6 filas y la fila entera
+   completos <- complete.cases(airquality)
+   completos # filas con datos faltantes
+   airquality[completos,] # extrae filas completas
+   airquality[completos,][1:6,] # extrae filas del 1 al 6 con datos completos
+   airquality[1:6,][completos,]
+   
+   # Operaciones Vectorizadas
+   x <- 1:4; y <- 6:9 # si el tamano no es igual repetira el menor valor para las operaciones
+   x + y
+   x>2
+   x>=2
+   y == 8 # para evaluar el igual se pone ==
+   x*y
+   x/y
+   # Operaciones con matrices
+   x <- matrix(1:4,2,2); y <- matrix(rep(10,4),2,2) # rep repite el numero aqui el diez 4 veces
+   x*y
+   x/y
+   x %*% y # solo funciona con la dimension de la matriz correcta, multiplicacion de matrices
+   
