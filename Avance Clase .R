@@ -294,3 +294,21 @@ class(x)
    x/y
    x %*% y # solo funciona con la dimension de la matriz correcta, multiplicacion de matrices
    
+   # Estructuras de control If-Else
+   
+   If(x>3) {
+     y <-10
+   } else {y<-0}
+   
+   #Estructuras de control For
+   for(i in 1:10){print(i)}
+   
+   x <- c("a","b","c","d")
+   for(i in 1:4){print(x[i])}
+   for(i in seq_along(x)){print(x[i])} # seq_along cuenta la longitud de la secuencia
+   for (letra in x){print(letra)} 
+   for(i in 1:4)print(x[i]) # se pueden omitir los parentesis si solo es una instruccion   
+   
+   w<- matrix(1:6,2,3) 
+   for(i in seq_len(nrow(w))){for(j in seq_len(ncol(w))){print(w[i,j])}}
+       
