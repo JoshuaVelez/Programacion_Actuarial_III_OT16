@@ -310,5 +310,105 @@ class(x)
    for(i in 1:4)print(x[i]) # se pueden omitir los parentesis si solo es una instruccion   
    
    w<- matrix(1:6,2,3) 
-   for(i in seq_len(nrow(w))){for(j in seq_len(ncol(w))){print(w[i,j])}}
-       
+   for(i in seq_len(nrow(w))){for(j in seq_len(ncol(w))){print(w[i,j])}} # Convenientemente se deben anidar 2 o 3 niveles de ciclo for
+   
+   # ciclos While # Las condiciones se evaluan de izquierda a derecha
+   z <- 5
+   while(z>= 3 && z<=10){ # && se evalua un solo numero, doble simbolo con condiciones verdadero o falso
+     print(z)
+   moneda <- rbinom(1,1,0.5) # distribucion binomial
+   if(moneda==1){ # Caminata Aleatoria 
+     z <- z+1
+   } else {
+       z <- z-1}
+   }
+   # mismo caso pero guardando en un vector
+   z <- 5
+   x <- c(z)
+   while(z>= 3 && z<=10){ 
+     print(z)
+     moneda <- rbinom(1,1,0.5) 
+     x <-c(x,z)
+     if(moneda==1){ # Caminata Aleatoria 
+       z <- z+1
+     } else {
+       z <- z-1}
+   }
+   x
+  plot(x)
+   z <- 5
+   x <- c(z)
+   while(z>= 3 && z<=10){ 
+     print(z)
+     moneda <- rbinom(1,1,0.5) 
+     x <-c(x,z)
+     if(moneda==1){ # Caminata Aleatoria 
+       z <- z+0.5
+     } else {
+       z <- z-0.5}
+   }
+   plot(x) # hace una grafica de x 
+   str(x) # mide tamaño de x
+   
+   # Repeat inicia un ciclo infinito que no parara hasta llamar un break
+   x0 <- 1
+   tol <- 1e-8
+   repeat{
+     x1 <- CalculaEstimado(x0)
+      if(abs(x1-x0)< tol){break
+      }else{
+          x0 <- x1
+        }
+   }
+   
+   # Creacion de funciones
+   
+   suma2 <- function(x,y){
+     x +y
+   }
+   suma2(1,2) # para correr se pone en la consola
+   mayor10 <- function(x){
+     x[x>10]
+   }
+   mayor10(runif(100,5,15)) # para correr se pone en la consola
+   # mayorque cualquier numero
+   mayorque <- function(x,n){  
+     x[x>n]
+   }
+   mayorque(1:10,3)  # para correr se pone en la consola
+   
+   promedioCol <- function(x,quitar.NA = TRUE){
+     nc <- ncol(x)
+     medias <- vector("numeric",nc)
+     for (i in 1:nc){
+       medias[i] <- mean(x[,i], na.rm = quitar.NA ) #na.rm quita los valores faltantes
+     } 
+     medias
+   }
+   promedioCol(as.data.frame(c(1,2,3,NA)))
+   
+   # Evaluacion Perez Sosa
+   f <- function(a,b){
+     a^2
+   }
+   f(2,"NA")
+   f <- function(a,b){
+     print(a)
+     print(b)
+   }
+   f(2) 
+   
+   # Argumento "..."
+   myplot <- function(x,y, type="l",...){ # significa todo los demas argumentos que pueden ser utilizados 
+     plot(x,y,type=type, ...)
+   }
+   
+   args(paste) # paste es para concatenar
+   function(..., sep = " ", collapse = NULL) # cuando no se conoce el Num. de argumentos por anticipado
+     NULL
+   
+   args(cat)
+   function (...,file = "", sep = " ", fill = FALSE, labels = NULL, append = FALSE)
+     NULL
+   
+   paste("a","b",sep=":") # se debe de nombrar los argumentos despues de los ..., con ""
