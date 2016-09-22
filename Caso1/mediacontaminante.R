@@ -13,4 +13,5 @@
           }
  }
  
+ mediacontaminante("~/GitHub/Programacion_Actuarial_III_OT16/specdata", "nitrate", 2:4) # Para correr cambiar directorio e id
  
