@@ -14,3 +14,5 @@ corr <- function(directorio, horizonte=0) {
 }
 
 corr("~/GitHub/Programacion_Actuarial_III_OT16/specdata", 1000) # Para correr cambiar directorio y el horizonte
+cr <- corr("~/GitHub/Programacion_Actuarial_III_OT16/specdata", 150)
+head(cr)
