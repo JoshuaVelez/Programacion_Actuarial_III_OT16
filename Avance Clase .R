@@ -181,19 +181,6 @@ class(x)
   setwd("~/GitHub/Programacion_Actuarial_III_OT16")
   data <- read.csv("Datos_S&P.csv")
   data <- read.table("Datos_S&P.csv",T,",")
-  data <- read.table("Datos_S&P.csv",F,",",nrows = 100) # tarea 2
-  clases <- sapply(data,class)
-  data <- read.table("Datos_S&P.csv",F,",",colClasses = clases)
-  data
-
-  # uso de Dput y dget
-  
-  y <- data.frame(a=1,b="a")
-  dput(y) # al correr asi se muestra la descripcion del objeto
-  dput(y,file="y.R") # almaceno un texto mostrando como se guardo al objeto en R
-  nueva.y <- dget("y.R")
-  y
-  nueva.y
   
   x <- "Programacion Actuarial III"
   y <- data.frame(a=1,b="a")
@@ -412,3 +399,45 @@ class(x)
      NULL
    
    paste("a","b",sep=":") # se debe de nombrar los argumentos despues de los ..., con ""
+   
+   search() # orden de revision de funciones
+   library() # para colocar el paquete en search a la segunda posicion
+   
+   # esta funcion regresa como resultado una funcion como su valor
+   hacer.potencia <- function(n) {
+     potencia <- function(x) {
+       x^n
+     }
+  
+     potencia
+   }
+   
+   cubica <- hacer.potencia(3)
+   cubica(3)  
+   cuadrada <- hacer.potencia(2)
+   cuadrada(3)
+   
+   ls(environment(cubica))
+   get("n", environment(cubica))
+   ls(environment(cuadrada))
+  get("n", environment(cuadrada))
+   
+  y <- 10
+  
+  f <- function(x) {
+    y <- 2
+    y^2 + g(x)
+  }
+  
+  g <- function(x) {
+    x*y                # utiliza la y que esta fuera del entorno y=10
+  }
+  
+  # Fechas y tiempo
+  x <- as.Date("1970-01-01")
+  x
+  unclass(x)
+  unclass(as.Date("1970-01-02"))
+  
+  date()
+  as.POSIXct.Date()
