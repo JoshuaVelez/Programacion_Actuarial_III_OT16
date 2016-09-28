@@ -441,3 +441,53 @@ class(x)
   
   date()
   as.POSIXct.Date()
+  
+  lapply
+  
+  x <- list(a = 1:5, b = rnorm(10000))
+  lapply(x, mean)
+  
+  x <- list(a = 1:5, b = rnorm(10), c = rnorm(10, 1), d = rnorm(10, 2))
+  lapply(x, mean)
+  
+  sapply(X, mean) # hace lo mismo que lapply pero simplificado
+  
+  x <- 1:4
+  lapply(x, runif) # runif genera numero de aleatorios de acuedo a la secuencia uniformes entre 0 y 1
+  
+  x <- 1:4
+  lapply(x, runif, min = 5, max = 15) # para generar numeros aleatorios entre un intervalo
+  
+  sapply(x, runif, min = 5, max = 15)
+   
+  # Apply
+  x <- matrix(rnorm(200), 20, 10)
+  apply(x, 2, mean)        
+  
+  apply(x,1,sum)
+  
+  x <- matrix(rnorm(200), 20, 10)
+  apply(x, 1, quantile, probs = c(0.25, 0.75))
+  
+  a <- array(rnorm(2 * 2 * 10), c(2, 2, 10))
+  apply(a, c(1, 2), mean)
+  rowMeans(a,dims = 2)
+  
+  list(rep(1, 4), rep(2, 3), rep(3, 2), rep(4, 1))
+  # la lista se puede hacer con mapply
+  # mapply para aplicar de manera vectorizada los argumentos de una funcion
+  mapply(rep,1:4,4:1)
+  
+  noise <- function(n, mean, sd) {
+      rnorm(n, mean, sd)
+      }
+  mapply(noise, 1:5, 1:5, 2)
+  
+  # Tapply
+  x <- c(rnorm(10),runif(10),rnorm(10,1))
+  f <- gl(3,10) # gl genera niveles
+  f
+  
+  tapply(x,f,mean)
+  tapply(x,f,mean,simplify = F)
+  
