@@ -491,3 +491,30 @@ class(x)
   tapply(x,f,mean)
   tapply(x,f,mean,simplify = F)
   
+  # split
+  x <- c(rnorm(10),runif(10),rexp(10))
+  f <- gl(3,10)
+  f
+  split(x,f)
+  
+  lapply(split(x,f),mean)
+  
+  library(datasets)
+  head(airquality)
+  
+  s <- split(airquality, airquality$Month)
+  s
+  
+  s <- split(airquality, airquality$Month) 
+  lapply(s, function(x) colMeans(x[, c(1:3)], na.rm = TRUE)) # Funcion anonima no tiene nombre pero se puede llamar
+  
+  sapply(s, function(x) colMeans(x[, c(1:4)], na.rm = TRUE))
+  
+  x <- rnorm(10)
+  f1 <- gl(2, 5)
+  f2 <- gl(5, 2)
+  f1
+  f2
+  interaction(f1,f2)
+  
+  str(split(x, list(f1, f2))) # los que no estan relacionados les da un valor de 0
