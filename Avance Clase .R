@@ -518,3 +518,112 @@ class(x)
   interaction(f1,f2)
   
   str(split(x, list(f1, f2))) # los que no estan relacionados les da un valor de 0
+  
+  # Debugging
+  log(-1) # Warning message
+  printmessage <- function(x) {
+      if(x > 0)
+          print("x is greater than zero")
+      else
+          print("x is less than or equal to zero")
+      invisible(x)
+      }
+  printmessage(1)
+  printmessage(NA) # da un error de valores faltantes
+  
+  printmessage2 <- function(x) {
+      if(is.na(x))
+          print("x is a missing value!")
+      else if(x > 0)
+          print("x is greater than zero")
+      else
+          print("x is less than or equal to zero")
+      invisible(x)
+      }
+  x <- log(-1) # produce valores NA
+  printmessage2(x)
+  
+  # hacer estos ejercicios con el enviroment vacio
+  rm(x)
+  mean(x)
+  traceback() #muestra la funcion donde se encontro un error
+  lm(y ~ x)
+  traceback()
+  debug(lm)# evalua paso a paso una funcion
+  lm(y ~ x) # ponerle n hasta que te muestre el error, n es next
+  options(error = recover)
+  read.csv('perritos')
+  0
+  
+  str(str)
+  str(lm)
+  str(ls)
+  x <- rnorm(100)
+  str(x)
+  summary(x)
+  
+  f <-gl(40, 10) # genera lista
+  str(f)
+  str(airquality)
+  
+  m <- matrix(rnorm(100), 10, 10)
+  str(m)
+  s <- split(airquality, airquality$Month)
+  str(s)
+  
+  #Generacion de numeros aleatorios
+  x <- rnorm(10)
+  x
+  summary(x)
+  summary(y)
+  set.seed(1) # para generar numeros aleatorios iguales
+  rnorm(5)
+  set.seed(2)
+  rnorm(5)
+  
+  normal1 <- rnorm(10000)
+  normal2 <- rnorm(10000, 10, 5)
+  hist(normal1) # Crea un histograma de frecuencias
+  summary(normal1)
+  hist(normal2)
+  summary(normal2)
+  
+  rpois(10,1)
+  poisson1 <- rpois(10000, 1)
+  poisson2 <- rpois(10000, 10)
+  hist(poisson1)
+  hist(poisson2)
+  
+  ppois(2,2)
+  ppois(4,2)
+  ppois(6,2)
+  hist(rpois(10000,2))
+  
+  ppois(0,2)
+  
+  # Generando Numeros aleatosios de un modelo lineal
+  set.seed(20)
+  x <- rnorm(100,0,1)
+  e <- rnorm(100, 0, 2)
+  y <- 0.5 + 2 * x + e
+  summary(y)
+  plot(x,y)
+  z <- 0.5 + 2 * x
+  plot(x,z)
+  
+  set.seed(10)
+  x <- rbinom(100,1, 0.5)
+  e <- rnorm(100,0,2)
+  y <- 0.5 + 2*x + e
+  summary(y)
+  plot(x,y)
+  plot(x,y, main="Modelo Lineal", col="Dark red")
+  
+  set.seed(1)
+  x <- rnorm(100)
+  log.mu <- 0.5 + 0.3 * x
+  y <- rpois(100, exp(log.mu))
+  summary(y)
+  plot(x,y, main = "Modelo Poisson", col=" Purple")
+  
+ 
