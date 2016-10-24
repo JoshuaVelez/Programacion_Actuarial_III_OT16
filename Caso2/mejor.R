@@ -1,9 +1,11 @@
+setwd("~/GitHub/Programacion_Actuarial_III_OT16/Caso2")
+
 mejor <- function(estado, resultado) {  
     # Lectura de datos 
     # Revisión de la validez de estado y resultado 
     # Regresa el nombre del hospital con la tasa más baja de mortalidad de 30 días 
 
-    data <- read.csv("outcome-of-care-measures.csv", colClasses = "character")
+    data <- read.csv("outcome-of-care-measures.csv", colClasses = "character", na.strings = "Not Available")
     
     estados <- data[ , 7]
     

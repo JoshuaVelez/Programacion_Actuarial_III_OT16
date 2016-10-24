@@ -1,4 +1,4 @@
----
+nbjjkbjkbjbjjjjjkj, hgggu~---
 title: "Practica2"
 author: "Joshua Velez"
 date: "25 de agosto de 2016"
@@ -626,4 +626,53 @@ class(x)
   summary(y)
   plot(x,y, main = "Modelo Poisson", col=" Purple")
   
- 
+  set.seed(1)
+  sample(1:10, 4)   # correr dos veces para ver el cambio
+  sample(letters,5)
+  sample(1:10)  # correr dos veces para ver el cambio, probabilidad de que esto suceda 10!
+  sample(1:10, replace=TRUE) # Probabilidad es 10^10
+  
+  system.time(readLines("http://www.fcfm.buap.mx"))
+  
+  hilbert <- function(n){
+          i <- 1:n
+          1 / outer(i - 1, i, "+")
+          }
+    x <- hilbert(1000)
+    system.time(x <- hilbert(1000))
+  system.time(svd(x))
+     
+  
+  
+ if(!file.exists("data")){
+     dir.create("data")
+ } 
+  #Descargar datos de internet
+  
+  url <- "https://data.baltimorecity.gov/api/views/dz54-2aru/rows.csv?accessType=DOWNLOAD"
+  download.file(url, destfile = "./data/camaras.csv")
+  list.files("./data")
+  
+  fechadescarga <- date()
+  fechadescarga
+  
+  #Cargar los datos desde mi computadora
+  dataCam <- read.table("./data/camaras.csv",sep=",", header = TRUE)
+  head(dataCam)
+  datosCam <- read.csv("./data/camaras.csv")
+  head(datosCam)
+  
+  if(!file.exists("data")){dir.create("data")}
+  fileUrl <- "https://data.baltimorecity.gov/api/views/dz54-2aru/rows.xlsx?accessType=DOWNLOAD"
+  download.file(fileUrl,destfile="./data/cameras.xlsx",method="curl")
+
+  find.java <- function() {
+      difor (root in c("HLM", "HCU")) for (key in c("Software\\JavaSoft\\Java Runtime Environment", 
+                                                  "Software\\JavaSoft\\Java Development Kit")) {
+          hive <- try(utils::readRegistry(key, root, 2), 
+                      silent = TRUE)
+          if (!inherits(hive, "try-error")) 
+              return(hive)
+      }
+      hive
+  }

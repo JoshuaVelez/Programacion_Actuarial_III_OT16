@@ -1,3 +1,5 @@
+setwd("~/GitHub/Programacion_Actuarial_III_OT16/Caso2")
+
 rankhospital <- function(estado, resultado, num = "mejor") { 
     # Lectura de datos 
     # Revisión de la validez de estado y resultado 

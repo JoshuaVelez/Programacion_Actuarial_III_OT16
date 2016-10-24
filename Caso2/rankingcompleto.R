@@ -1,3 +1,5 @@
+setwd("~/GitHub/Programacion_Actuarial_III_OT16/Caso2")
+
 rankingcompleto <- function(resultado, num = "mejor") { 
        
         if(!(resultado %in% as.vector(c("Infarto","Falla Cardiaca","Neumonia")))){
