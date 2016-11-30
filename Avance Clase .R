@@ -1,4 +1,4 @@
-nbjjkbjkbjbjjjjjkj, hgggu~---
+
 title: "Practica2"
 author: "Joshua Velez"
 date: "25 de agosto de 2016"
@@ -676,3 +676,221 @@ class(x)
       }
       hive
   }
+  
+  library(data.table)
+  DF = data.frame(x=rnorm(9),y=rep(c("a","b","c"),each=3),z=rnorm(9))
+  head(DF,3)
+  DT = data.table(x=rnorm(9),y=rep(c("a","b","c"),each=3),z=rnorm(9))
+  head(DT,3)
+  
+  tables()
+  
+  DT[2,]
+  DT[DT$y=="a",]
+  DT[DT$y=="b",]
+  
+  DT[c(2,3)]
+  DT[,c(2,3)]
+  
+  # subconjuntos de columnas en data.table
+  {
+      x = 1
+      y = 2
+  }
+  k = {print(10); 5}
+  print(k)
+  DT[,list(mean(x),sum(z))]
+  DT[,table(y)]
+  DT2 <- DT
+  DT[, y:= 2] # añade columnas nuevas
+  
+  DT[,m:= {tmp <- (x+z); log2(tmp+5)}]
+  DT
+  DT[,a:=x>0] # Evalua los datos e indica si son mayores a 0 con verdadero y falso
+  DT
+  DT[,b:= mean(x+w),by=a] # hace un promedio excluyendo a los que son verdadero, y otro con puros falsos
+  DT
+  
+  set.seed(123)
+  DT <- data.table(x=sample(letters[1:3], 1E5, TRUE))
+  DT[, .N, by=x]
+  
+  library(data.table)
+  DT <- data.table(x=rep(c("a","b","c"),each=100), y=rnorm(300))
+  setkey(DT, x)
+  DT['a']
+  
+  DT1 <- data.table(x=c('a', 'a', 'b', 'dt1'), y=1:4)
+  DT2 <- data.table(x=c('a', 'b', 'dt2'), z=5:7)
+  setkey(DT1, x); setkey(DT2, x)
+  merge(DT1, DT2) #junta DT1 y Dt2
+  
+  set.seed(1)
+  df_gde <- data.frame(x=rnorm(1E6), y=rnorm(1E6))
+  file <- tempfile()
+  write.table(df_gde, file=file, row.names=FALSE, col.names=TRUE, sep="\t", quote=FALSE)
+  system.time(fread(file))
+  system.time(read.table(file, header=TRUE, sep="\t"))
+  
+  install.packages("RMySQL")
+  library(RMySQL)
+  ucscDb <- dbConnect(MySQL(),user="genome", 
+                      host="genome-mysql.cse.ucsc.edu")
+  result <- dbGetQuery(ucscDb,"show databases;"); dbDisconnect(ucscDb);
+  result
+  
+  hg19 <- dbConnect(MySQL(),user="genome", db="hg19",
+                    host="genome-mysql.cse.ucsc.edu")
+  allTables <- dbListTables(hg19)
+  length(allTables)
+  allTables[1:3]
+  
+  dbListFields(hg19,"affyU133Plus2")
+  dbGetQuery(hg19, "select count(*) from affyU133Plus2")
+  
+  affyData <- dbReadTable(hg19, "affyU133Plus2")
+  head(affyData)
+  
+  query <- dbSendQuery(hg19, "select * from affyU133Plus2 where misMatches between 1 and 3")
+  affyMis <- fetch(query); quantile(affyMis$misMatches)
+  affyMisSmall <- fetch(query,n=10); dbClearResult(query);
+  dim(affyMisSmall)
+  
+  dbDisconnect(hg19) # siempre se debe desconectar
+  
+  source("http://bioconductor.org/biocLite.R")
+  biocLite("rhdf5")
+  library(rhdf5)
+  created = h5createfile("example.h5")
+  created
+  
+  created = h5createGroup("example.h5","foo")
+  created = h5createGroup("example.h5","baa")
+  created = h5createGroup("example.h5","foo/foobaa")
+   h5ls("example.h5")
+   
+   A = matrix(1:10,nr=5,nc=2)
+   h5write(A, "example.h5","foo/A")
+   B = array(seq(0.1,2.0,by=0.1),dim=c(5,2,2))
+   attr(B, "scale") <- "liter"
+   h5write(B, "example.h5","foo/foobaa/B")
+   h5ls("example.h5")
+   
+   df = data.frame(1L:5L,seq(0,1,length.out=5),
+                   c("ab","cde","fghi","a","s"), stringsAsFactors=FALSE)
+   h5write(df, "example.h5","df")
+   h5ls("example.h5")
+   
+   readA = h5read("example.h5","foo/A")
+   readB = h5read("example.h5","foo/foobaa/B")
+   readdf= h5read("example.h5","df")
+   readA
+   
+   h5write(c(12,13,14),"example.h5","foo/A",index=list(1:3,1))
+   h5read("example.h5","foo/A")
+   
+   set.seed(13435)
+   x <- data.frame("var1" =sample(1:5),"var2"=sample(6:10), "var3"=sample(11:15))
+   x <- x[sample(1:5),]
+   x
+   x$var2[c(1,3)]= NA
+   x
+   x[,1]
+   x[,"var1"]
+   x$var2[c(1,2)]
+   x[1:2,'var2']
+   x
+   subset(x,x$var1<=3 & x$var3>11)
+   x[x$var1<=3 & x$var3>11,]
+   x[x$var1<=3 | x$var3>11,]
+   x[x$var1<=3 || x$var3>11,]
+   which(x$var2 >8)
+   x[which(x$var2 >8),]
+   
+   sort(x$var1)
+   sort(x$var1, decreasing = T)
+   sort(x$var2)
+   sort(x$var2, decreasing = T)
+   sort(x$var2, decreasing = T, na.last= T)
+   
+   order(x$var1)
+   x[order(x$var1),]
+   x[order(x$var2, na.last= F, decreasing = T),]
+   
+   library(plyr)
+   arrange(x,var1)
+   arrange(x, desc(var1))
+   
+   x$var4 <- rnorm(5)
+   x
+   cbind(x,rnorm(5))
+   
+   if(!dir.exists("data")){dir.create("data")}
+   url <- "https://data.baltimorecity.gov/api/views/k5ryef3g/rows.csv?accessType=DOWNLOAD"
+   download.file(url,"./data/restaurants.csv")
+   data <- read.csv("./data/restaurants.csv")
+   head(data,n=3)
+   tail(data,n=3)
+   
+   quantile(data$councilDistrict, na.rm=T)
+   quantile(data$councilDistrict,probs= c(0.5,0.75,0.9))
+   table(data$zipCode, useNA = "ifany")
+   table(data$councilDistrict, data$zipCode)
+   
+   sum(is.na(data$councilDistrict))
+   any(is.na(data$councilDistrict)) # any funcion que pregunta algun
+   all(!is.na(data$councilDistrict))# all funcion que pregunta y,...,y
+   all(dat$zipCode > 0)
+   colSums(is.na(data))
+   all(colSums(is.na(data))==0)
+   
+   table(data$zipCode %in% c("21212"))
+   table(data$zipCode %in% c("21212","21213"))
+   data[data$zipCode %in% c("21212","21213"), ]
+   
+   data(UCBAdmissions)
+   DF = as.data.frame(UCBAdmissions)
+   summary(DF)
+   xt <- xtabs(Freq ~ Gender + Admit,data=DF) # tablas cruzadas
+   xt
+   warpbreaks$replicate <- rep(1:9, len =54)
+   xt = xtabs(breaks ~., data=warpbreaks)
+   xt
+   ftable(xt) # une los datos de las replicaciones
+   
+   fakeData = rnorm(1e5)
+   object.size(fakeData) # cada dato pesa 80 bytes
+   print(object.size(fakeData), units="Mb")
+   
+   # Creacion de secuencias
+   s1 <- seq(1,10,by=2) ; s1
+   s2 <- seq(1,10,length=3); s2
+   x <- c(1,3,8,25,100); seq(along = x)
+   s2 <- seq(.1,.7,length=.01); s3
+   
+   f(!file.exists("./data")){dir.create("./data")}
+   fileUrl <- "https://data.baltimorecity.gov/api/views/k5ry-ef3g/rows.csv?accessType=DOWNLOAD"
+   download.file(fileUrl,destfile="./data/restaurants.csv",method="curl")
+   restData <- read.csv("./data/restaurants.csv")
+   # subconjuntos de variables
+   restData$cerca = restData$neighborhood %in% c("Roland Park", "Homeland")
+   table(restData$cerca)
+   #variables binarias
+   data$zipError = ifelse(data$zipCode < 0, TRUE, FALSE)
+   data[data$zipError,]
+   table(data$zipError,data$zipCode < 0)
+   # variables categoricas
+   data$zipGrupo = cut(data$zipCode,breaks=quantile(data$zipCode))
+   table(data$zipGrupo)
+   table(data$zipGrupo,data$zipCode)
+   
+   library(Hmisc)
+   data$zipGrupo = cut2(data$zipCode,g=4)
+   table(data$zipGrupo)
+   
+   #crear factores de variables
+   data$zcf <- factor(data$zipCode)
+   data$zcf[1:10]
+   class(data$zcf)
+   data$zipCode[1:10]
+   class(data$zipCode)
